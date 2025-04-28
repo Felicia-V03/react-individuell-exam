@@ -1,0 +1,32 @@
+.homePage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-purple);
+}
+
+.logo-image {
+  width: 50%;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.homePage-title {
+  font-family: var(--font-first-sansita);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--color-pink);
+  margin-bottom: 1rem;
+}
+
+.homePage-sub {
+    font-family: var(--font-second-fira);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita:ital,wght@1,900&display=swap');
+
+:root {
+  --font-first-sansita: "Sansita", sans-serif;
+  --font-second-fira: "Fira Sans", sans-serif;
+
+  --color-purple: #231F42;
+  --color-pink: #F56B9A;
+  --color-white: #FFFFFF;
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
