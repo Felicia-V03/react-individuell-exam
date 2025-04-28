@@ -1,27 +1,6 @@
-// import { useFetch } from "../../Hooks/useFetch.js";
-// import { useEffect, usestate } from "react";
-
-// function EventsPage() {
-//   const { data: events } = useFetch("https://santosnr6.github.io/Data/events.json");
-
-//   useEffect(() => {
-//     if (events) {
-//       console.log("Fetched events:", events);
-//     }
-//   }
-//   , [events]);
-
-//   return (
-//     <div>
-//       <h1>Events Page</h1>
-//       <p>This is the events page.</p>
-//     </div>
-//   );
-// }
-
-// export default EventsPage;
-
 import { useFetch } from "../../Hooks/useFetch";
+import { Link } from "react-router-dom";
+import "./eventsPage.css";
 
 function EventsPage() {
   const { data: eventsData, isLoading, isError } = useFetch("https://santosnr6.github.io/Data/events.json");
@@ -34,13 +13,22 @@ function EventsPage() {
 
 
   return (
-    <div>
-      <h1>Events Page</h1>
-      <ul>
+    <div className="events-page page-container">
+      <h1 className="events-page_title">Events</h1>
+      <p>Search</p>
+      <ul className="events-list">
         {events.map((event) => (
-          <li key={event.id}>
-            <h2>{event.name}</h2>
-          </li>
+          <Link to={`/event/${event.id}`} key={event.id} className="events-item">
+              <p className="events-item_date">{event.when.date}</p>
+              <article className="events-item_info">
+                <h2 className="events-item_title">{event.name}</h2>
+                <p className="events-item_place">{event.where}</p>
+                <article className="events-item_sub">
+                  <p className="events-item_time">{event.when.from} - {event.when.to}</p>
+                  <p className="events-item_price">{event.price} SEK</p>
+                </article>
+              </article>
+            </Link>
         ))}
       </ul>
     </div>

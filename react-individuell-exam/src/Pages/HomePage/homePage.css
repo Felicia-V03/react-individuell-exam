@@ -1,12 +1,4 @@
-.homePage-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--color-purple);
-}
+
 
 .logo-image {
   width: 50%;
@@ -14,7 +6,7 @@
   margin-bottom: 2rem;
 }
 
-.homePage-title {
+.home-page_title {
   font-family: var(--font-first-sansita);
   font-weight: 900;
   font-style: italic;
@@ -23,7 +15,7 @@
   margin-bottom: 1rem;
 }
 
-.homePage-sub {
+.home-page_sub {
     font-family: var(--font-second-fira);
     font-style: italic;
     font-size: 1.5rem;
