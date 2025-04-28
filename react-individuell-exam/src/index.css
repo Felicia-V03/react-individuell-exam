@@ -7,10 +7,24 @@
   --color-purple: #231F42;
   --color-pink: #F56B9A;
   --color-white: #FFFFFF;
+  --color-white-80: #FFFFFFCC;
+
+  --color-green: #37AEAB;
+  --color-grey: #D0D0D0;
 }
 
 *{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--color-purple);
 }
