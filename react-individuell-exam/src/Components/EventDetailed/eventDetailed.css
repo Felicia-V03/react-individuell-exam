@@ -1,0 +1,39 @@
+.event-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.event-info_title {
+  font-family: var(--font-first-sansita);
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: var(--color-pink);
+  width: 100%;
+}
+
+.event-info_date-time {
+  font-family: var(--font-second-fira);
+  font-weight: 800;  
+  font-size: 1.2rem;
+  color: var(--color-green);
+  width: 100%;  
+}
+
+.event-info_place {
+  font-family: var(--font-second-fira);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--color-white-70);
+  width: 100%;
+}

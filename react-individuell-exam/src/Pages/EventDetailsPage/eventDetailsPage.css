@@ -1,0 +1,16 @@
+.events-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.page_sub {
+  font-family: var(--font-second-fira);
+  font-size: 1.2rem;
+  color: var(--color-white-80);
+  margin-bottom: 2rem;
+  padding: 0 3rem;
+  text-align: center;
+}

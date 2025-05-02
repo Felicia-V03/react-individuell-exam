@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Sansita:ital,wght@1,900&display=swap');
+@font-face {
+  font-family: 'Sansita-One';
+  src: url('./assets/SansitaOne.woff2') format('woff2'),
+}
 
 :root {
-  --font-first-sansita: "Sansita", sans-serif;
+  --font-first-sansita: "Sansita-One", sans-serif;
   --font-second-fira: "Fira Sans", sans-serif;
 
   --color-purple: #231F42;
   --color-pink: #F56B9A;
   --color-white: #FFFFFF;
   --color-white-80: #FFFFFFCC;
+  --color-white-70: #FFFFFFB3;
 
   --color-green: #37AEAB;
   --color-grey: #D0D0D0;
@@ -22,9 +26,16 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
   width: 100vw;
   background-color: var(--color-purple);
+}
+
+.page_title {
+  font-family: var(--font-first-sansita);
+  font-weight: 900;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--color-pink);
+  margin-bottom: 1rem;
 }
