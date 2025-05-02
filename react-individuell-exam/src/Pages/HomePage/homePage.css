@@ -1,17 +1,20 @@
-
-
-.logo-image {
-  width: 50%;
-  height: auto;
-  margin-bottom: 2rem;
+.home-page {
+  justify-content: center;
+  align-items: center;
 }
 
 .home-page_title {
   font-family: var(--font-first-sansita);
-  font-weight: 900;
+  font-weight: 1000;
   font-style: italic;
   font-size: 2rem;
   color: var(--color-pink);
+  margin-bottom: 1rem;
+}
+
+.logo-image {
+  width: 50%;
+  height: auto;
   margin-bottom: 1rem;
 }
 
@@ -20,5 +23,4 @@
     font-style: italic;
     font-size: 1.5rem;
     color: var(--color-white);
-    margin-bottom: 2rem;
 }
