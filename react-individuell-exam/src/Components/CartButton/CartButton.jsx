@@ -1,16 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./cartButton.css";
 
-function CartButton() {
+function CartButton({children}) {
   const Navigate = useNavigate();
+  const { id } = useParams();
 
   const handleClick = () => {
-    Navigate("/orders");
+    if (id) {
+      Navigate("/orders");
+    } else {
+      Navigate("/ticket");
+    }
   }
 
   return (
     <div className="cart-button">
-      <button onClick={handleClick} className="cart-button__btn">Lägg i varkorgen</button>
+      <button onClick={handleClick} className="cart-button__btn">
+        {children}
+      </button>
     </div>
   );
 }

@@ -20,3 +20,26 @@ export function useFetch(url) {
 
   return { data, isLoading, isError };
 }
+
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+
+// function useFetch() {
+//   const [data, setData] = useState(null);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [isError, setIsError] = useState(false);
+
+//   useEffect(() => {
+//     setIsLoading(true);
+//     axios.get('https://santosnr6.github.io/Data/events.json')
+//         .then(response => setData(response.data))
+//         .catch(error => setIsError(true))
+//         .finally(() => setIsLoading(false));
+//   }, []);
+
+//   const eventsData = data?.events || [];
+//   console.log("Fetched data från API:", eventsData);
+//   return { eventsData, isLoading, isError };
+// }
+
+export default useFetch;

@@ -1,16 +1,8 @@
-.events-page {
+.event-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem;
+  justify-content: space-between;
 }
 
-.page_sub {
-  font-family: var(--font-second-fira);
-  font-size: 1.2rem;
-  color: var(--color-white-80);
+.event-page_sub {
   margin-bottom: 2rem;
-  padding: 0 3rem;
-  text-align: center;
 }

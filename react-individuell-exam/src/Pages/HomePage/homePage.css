@@ -1,6 +1,12 @@
 .home-page {
   justify-content: center;
+}
+
+.home-page_logo {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .home-page_title {
@@ -13,7 +19,7 @@
 }
 
 .logo-image {
-  width: 50%;
+  width: 60%;
   height: auto;
   margin-bottom: 1rem;
 }

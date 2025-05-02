@@ -1,8 +1,8 @@
-import { useFetch } from "../../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
 import "./eventsList.css";
 
-function EventsList() {
+function EventsList(event) {
   const { data: eventsData, isLoading, isError } = useFetch("https://santosnr6.github.io/Data/events.json");
   const events = eventsData?.events || [];
 
@@ -14,8 +14,6 @@ function EventsList() {
   if (!event) {
     return <p>Inga event tillgängliga.</p>;
   }
-
-  console.log("Event data:", event);
   
   return (
     <ul className="events-list">
@@ -34,7 +32,7 @@ function EventsList() {
           <p className="events-item_place">{event.where}</p>
           <article className="events-item_sub">
             <p className="events-item_time">{event.when.from} - {event.when.to}</p>
-            <p className="events-item_price">{event.price} SEK</p>
+            <p className="events-item_price">{event.price} sek</p>
           </article>
         </article>
       </Link>
