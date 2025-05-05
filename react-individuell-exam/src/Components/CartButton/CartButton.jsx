@@ -1,32 +1,27 @@
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import useCart from "../../stores/useCartStore.js";
 import useCounter from "../../stores/useCounter.js";
 import "./cartButton.css";
 
-function CartButton({children}) {
+function CartButton({children, event}) {
   const location = useLocation();
+  const { addToCart, clearCart } = useCart();
   const navigate = useNavigate();
   const { id } = useParams();
-
-  const { reset } = useCounter();
+  const { reset, count } = useCounter();
 
   const handleClick = () => {
+    if (!event) return;
+
     if (id) {
       navigate("/orders");
-      reset();
-      const eventsinfo = JSON.parse(localStorage.getItem("Chosen"));
-      localStorage.setItem("In Cart", JSON.stringify(eventsinfo));
-      localStorage.removeItem("Chosen");
-      localStorage.removeItem("EventId");
+      addToCart({ ...event, count }); // Lägg till i varukorgen
+      reset();   
     } else if (location.pathname === "/orders") {
       navigate("/ticket");
-      
-    } else if (location.pathname === "/ticket") {
-      navigate("/orders");
-      
-    } else {
-      return;
+      clearCart(); // Rensa varukorgen
     }
-  }
+  };
 
   return (
     <div className="cart-button">

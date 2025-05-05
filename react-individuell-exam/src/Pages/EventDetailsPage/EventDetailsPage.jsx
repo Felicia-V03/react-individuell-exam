@@ -22,7 +22,7 @@ function EventDetailsPage() {
       <p className="event-page_sub page_sub">You are about to score some tickets to</p>
       <EventDetailed event={event}/>
       <OrderCounter event={event}/>
-      <CartButton>Lägg i varukorgen</CartButton>
+      <CartButton event={event}>Lägg i varukorgen</CartButton>
     </div>
   );
 }

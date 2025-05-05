@@ -61,11 +61,6 @@
   aspect-ratio: 4/3;
 }
 
-.order-counter_buttons button:hover {
-  background-color: var(--color-pink);
-  color: var(--color-purple);
-}
-
 .order-counter_buttons p {
   padding: 0 2rem;
   font-size: 1.5rem;

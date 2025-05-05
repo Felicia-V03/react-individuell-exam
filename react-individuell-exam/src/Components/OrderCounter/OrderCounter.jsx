@@ -1,36 +1,12 @@
 import useCounter from "../../stores/useCounter.js";
-import { useEffect } from "react";
 import "./orderCounter.css";
 import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
 
 function OrderCounter({ event }) {
   const { count, increase, decrease } = useCounter();
-  if (!event) {
-      return console.log("Event data is not available.");
-  }
 
-  useEffect(() => {
-    localStorage.setItem("EventId", event.id);
+  if (!event) return null;
 
-    const eventsinfo = {
-      id: event.id,
-      name: event.name,
-      place: event.place,
-      when: {
-        date: event.when.date,
-        from: event.when.from,
-        to: event.when.to,
-      },
-      where: event.where,
-      price: event.price,
-      quantity: count,
-    };
-
-    localStorage.setItem("Chosen", JSON.stringify(eventsinfo));
-  }
-  , [event, count]);
-  
-  
   return (
     <section className="order-counter">
       <section className="order-counter_container">
