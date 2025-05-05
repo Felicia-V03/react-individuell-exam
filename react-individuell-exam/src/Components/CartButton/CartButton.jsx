@@ -4,22 +4,20 @@ import useCounter from "../../stores/useCounter.js";
 import "./cartButton.css";
 
 function CartButton({children, event}) {
-  const location = useLocation();
+  const Location = useLocation();
   const { addToCart, clearCart } = useCart();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { reset, count } = useCounter();
+  const { reset, quantity } = useCounter();
 
   const handleClick = () => {
-    if (!event) return;
-
-    if (id) {
+    if (event && id) {
+      addToCart({ ...event, quantity: quantity });
+      reset();
       navigate("/orders");
-      addToCart({ ...event, count }); // Lägg till i varukorgen
-      reset();   
-    } else if (location.pathname === "/orders") {
+    } else if (Location.pathname === "/orders") {
       navigate("/ticket");
-      clearCart(); // Rensa varukorgen
+      clearCart();
     }
   };
 

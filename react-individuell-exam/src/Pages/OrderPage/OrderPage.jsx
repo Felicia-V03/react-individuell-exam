@@ -6,7 +6,7 @@ function OrderPage() {
   const { cart } = useCart();
 
   const totalPrice = cart.reduce(
-    (sum, event) => sum + event.price * event.count,
+    (sum, event) => sum + event.price * event.quantity,
     0
   );
 
@@ -23,7 +23,7 @@ function OrderPage() {
               <li key={event.id} className="order-list__item">
                 <h2 className="order-list__title">{event.name}</h2>
                 <p className="order-list__price">{event.price} sek</p>
-                <p className="order-list__quantity">Antal: {event.count}</p>
+                <p className="order-list__quantity">Antal: {event.quantity}</p>
               </li>
             ))}
           </ul>

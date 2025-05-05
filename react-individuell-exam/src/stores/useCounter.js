@@ -1,10 +1,25 @@
 import { create } from "zustand";
 
+const savedQuantity = parseInt(localStorage.getItem("quantity"));
+
 const useCounter = create((set) => ({
-  count: 0,
-  increase: () => set((state) => ({ count: state.count + 1 })),
-  decrease: () => set((state) => ({ count: state.count > 0 ? state.count - 1 : 0, })),
-  reset: () => set({ count: 0 }),
+  quantity: savedQuantity,
+  increase: () =>
+    set((state) => {
+      const newQuantity = state.quantity + 1;
+      localStorage.setItem("quantity", newQuantity);
+      return { quantity: newQuantity };
+    }),
+  decrease: () =>
+    set((state) => {
+      const newQuantity = state.quantity > 0 ? state.quantity - 1 : 0;       
+      localStorage.setItem("quantity", newQuantity);
+      return { quantity: newQuantity };
+    }),
+  reset: () => {
+    localStorage.setItem("quantity", 0);
+    set({ quantity: 0 });
+  },
 }));
 
 export default useCounter;
