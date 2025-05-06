@@ -1,7 +1,10 @@
 import { create } from "zustand";
 
-const savedQuantity = parseInt(localStorage.getItem("quantity"));
-
+const savedQuantity = (() => {
+  const stored = localStorage.getItem("quantity");
+  const parsed = parseInt(stored);
+  return isNaN(parsed) ? 0 : parsed;
+})();
 const useCounter = create((set) => ({
   quantity: savedQuantity,
   increase: () =>

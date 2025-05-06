@@ -26,7 +26,7 @@ const useCart = create((set, get) => ({
   },
 
   clearCart: () => {
-    localStorage.removeItem("cart");
+    localStorage.setItem("cart", JSON.stringify([]));
     set({ cart: [] });
   }
 }));
