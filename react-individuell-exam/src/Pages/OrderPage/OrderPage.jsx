@@ -13,23 +13,26 @@ function OrderPage() {
   return (
     <div className="order-page page-container">
       <h1 className="page_title">Order</h1>
-
       {cart.length === 0 ? (
         <p>Varukorgen är tom.</p>
       ) : (
         <section className="order-list">
           <ul className="order-list__items">
             {cart.map((event) => (
-              <li key={event.id} className="order-list__item">
-                <h2 className="order-list__title">{event.name}</h2>
+              <ol key={event.id} className="order-list__item">
+                <article className="order-list__name-place">
+                  <h2 className="order-list__title">{event.name}</h2>
+                  <p className="order-list__place">{event.when.date} kl {event.when.from} - {event.when.to}</p>
+                </article>
                 <p className="order-list__price">{event.price} sek</p>
                 <p className="order-list__quantity">Antal: {event.quantity}</p>
-              </li>
+              </ol>
             ))}
           </ul>
         </section>
       )}
-      <h2 className="order-list__total">Totalt: {totalPrice} sek</h2>
+      <h2 className="order-list text">Totalt värde på order</h2>
+      <p className="order-list__total">{totalPrice} sek</p>
       <CartButton>Skicka order</CartButton>
     </div>
   );

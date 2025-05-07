@@ -1,4 +1,6 @@
 import useFetch from "../../hooks/useFetch";
+import { useEffect } from "react";
+import useCounter from "../../stores/useCounter.js";
 import { Link } from "react-router-dom";
 import "./eventsList.css";
 
@@ -7,6 +9,11 @@ function EventsList(event) {
   const events = eventsData?.events || [];
 
   console.log("Fetched events:", events);
+
+  const { reset } = useCounter();
+  useEffect(() => {
+    reset();
+  }, [reset]);
   
   if (isLoading) return <p>Laddar event...</p>;
   if (isError) return <p>Ett fel uppstod vid hämtning av event.</p>;
@@ -14,6 +21,12 @@ function EventsList(event) {
   if (!event) {
     return <p>Inga event tillgängliga.</p>;
   }
+
+  const savedQuantity = (() => {
+    const stored = localStorage.getItem("quantity");
+    const parsed = parseInt(stored);
+    return isNaN(parsed) ? 0 : parsed;
+  })();
   
   return (
     <ul className="events-list">
