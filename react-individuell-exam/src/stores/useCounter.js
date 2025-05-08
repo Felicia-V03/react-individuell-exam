@@ -1,27 +1,50 @@
 import { create } from "zustand";
 
-const savedQuantity = (() => {
-  const stored = localStorage.getItem("quantity");
-  const parsed = parseInt(stored);
-  return isNaN(parsed) ? 0 : parsed;
-})();
-const useCounter = create((set) => ({
-  quantity: savedQuantity,
-  increase: () =>
-    set((state) => {
-      const newQuantity = state.quantity + 1;
-      localStorage.setItem("quantity", newQuantity);
-      return { quantity: newQuantity };
-    }),
-  decrease: () =>
-    set((state) => {
-      const newQuantity = state.quantity > 0 ? state.quantity - 1 : 0;       
-      localStorage.setItem("quantity", newQuantity);
-      return { quantity: newQuantity };
-    }),
-  reset: () => {
-    localStorage.setItem("quantity", 0);
-    set({ quantity: 0 });
+const getInitialQuantity = () => {
+  try {
+    const stored = localStorage.getItem("quantity");
+    return stored ? JSON.parse(stored) : {};
+  } catch {
+    return {};
+  }
+};
+
+const useCounter = create((set, get) => ({
+  quantity: getInitialQuantity(),
+
+  increase: (id) => {
+    const quantity = get().quantity;
+    const updated = {
+      ...quantity,
+      [id]: (quantity[id] || 0) + 1,
+    };
+    localStorage.setItem("quantity", JSON.stringify(updated));
+    set({ quantity: updated });
+  },
+
+  decrease: (id) => {
+    const quantity = get().quantity;
+    const updated = {
+      ...quantity,
+      [id]: Math.max((quantity[id] || 0) - 1, 0),
+    };
+    localStorage.setItem("quantity", JSON.stringify(updated));
+    set({ quantity: updated });
+  },
+
+  reset: (id) => {
+    const quantity = get().quantity;
+    const updated = {
+      ...quantity,
+      [id]: 0,
+    };
+    localStorage.setItem("quantity", JSON.stringify(updated));
+    set({ quantity: updated });
+  },
+
+  resetAll: () => {
+    localStorage.setItem("quantity", JSON.stringify({}));
+    set({ quantity: {} });
   },
 }));
 
