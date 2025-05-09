@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Sansita-One';
+  src: url('./assets/SansitaOne.woff2') format('woff2'),
+}
+
+:root {
+  --font-first-sansita: "Sansita-One", sans-serif;
+  --font-second-fira: "Fira Sans", sans-serif;
+
+  --color-purple: #231F42;
+  --color-pink: #F56B9A;
+  --color-white: #FFFFFF;
+  --color-white-80: #FFFFFFCC;
+  --color-white-70: #FFFFFFB3;
+  --color-white-10: #FFFFFF1A;
+
+  --color-green: #37AEAB;
+  --color-grey: #D0D0D0;
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--color-purple);
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.page_title {
+  font-family: var(--font-first-sansita);
+  font-weight: 900;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--color-pink);
+  margin-bottom: 1rem;
+}
+
+.page_sub {
+  font-family: var(--font-second-fira);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--color-white-80);
+  padding: 0 3rem;
+  text-align: center;
+}
+
+.tickets-carousel {
+  width: 100%;
+}
+
+.ticket-error {
+  color: var(--color-white);
+  text-align: center;
+  font-family: var(--font-first-sansita);
+}
+
+.swiper {
+  height: auto;
+}

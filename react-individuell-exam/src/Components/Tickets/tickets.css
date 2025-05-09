@@ -1,0 +1,76 @@
+.ticket-card {
+  background: var(--color-white);
+  border-radius: 3px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.ticket-box {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ticket-dot {
+  border-bottom: 1px dashed #ccc;
+}
+
+.ticket-card__name {
+  font-size: 1.5rem;
+  color: var(--color-pink);
+  font-weight: bold;
+  font-family: var(--font-first-sansita);
+}
+
+.ticket-card__where{
+  font-family: var(--font-second-fira);
+  font-size: 1rem;
+  color: #181818;
+}
+
+.ticket-card__header {
+  font-family: var(--font-second-fira);
+  font-size: 0.7rem;
+  color: #858585;
+}
+
+.ticket-card__text {
+  font-family: var(--font-second-fira);
+  color: #313131;
+  font-size: 1rem;
+}
+
+.ticket-section {
+  background-color: #eeeeee;
+}
+
+.ticket-info {
+  display: flex;
+  justify-content: space-between;
+  text-align: start;
+  font-size: 0.7rem;
+  background-color: #e2e2e2;
+}
+
+.ticket-info-from {
+  border-right: 1px dashed #ccc;
+  border-left: 1px dashed #ccc;
+  aspect-ratio: 3/1;
+}
+
+.ticket-seat {
+  background-color: #dddddd;
+  color: #181818;
+}
+
+.ticket-barcode {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-card__barcode {
+  width: 50%;
+  fill: #ccc;
+}

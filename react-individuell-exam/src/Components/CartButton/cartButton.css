@@ -1,0 +1,15 @@
+.cart-button__btn {
+  background-color: var(--color-green);
+  color: white;
+  border-radius: 3px;
+  border: none;
+  padding: 1.3rem;
+  font-size: 16px;
+  cursor: pointer;
+
+  font-family: var(--font-second-fira);
+  font-weight: 700;
+
+  width: 100%;
+  align-self: flex-end;
+}

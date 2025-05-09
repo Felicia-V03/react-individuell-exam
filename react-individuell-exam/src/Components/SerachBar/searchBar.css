@@ -1,0 +1,31 @@
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-white-10);
+  border-radius: 3px;
+  padding: 0.6rem;
+
+}
+
+.las {
+  color: var(--color-purple);
+  font-size: 1.3rem;
+  aspect-ratio: 1/1;
+  margin-right: 1rem;
+  transform: rotate3d(0, 1, 0, 180deg);
+}
+
+input {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  background-color: transparent;
+  color: var(--color-white-70);
+  font-family: var(--font-second-fira);
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+}

@@ -1,0 +1,32 @@
+.home-page {
+  justify-content: center;
+}
+
+.home-page_logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-page_title {
+  font-family: var(--font-first-sansita);
+  font-weight: 1000;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--color-pink);
+  margin-bottom: 1rem;
+}
+
+.logo-image {
+  width: 60%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.home-page_sub {
+    font-family: var(--font-second-fira);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--color-white);
+}

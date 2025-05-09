@@ -1,0 +1,8 @@
+.event-page {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-page_sub {
+  margin-bottom: 2rem;
+}
