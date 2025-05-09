@@ -6,7 +6,7 @@ import useTickets from "../../stores/useTickets";
 import Tickets from "../Tickets/Tickets";
 import "../../index.css";
 
-
+//ticket carousel
 function TicketsCarousel() {
   const { tickets } = useTickets();
 
@@ -24,6 +24,7 @@ function TicketsCarousel() {
         modules={Navigation}
         className="tickets-list"
       >
+        {/* arrey with prop seat and event */}
         {Array.isArray(tickets) && tickets.length > 0 ? (
           tickets.map((event, index) => {
             return (

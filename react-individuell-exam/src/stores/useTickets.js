@@ -6,6 +6,7 @@ const getTickets = () => {
   return stored ? JSON.parse(stored) : [];
 };
 
+//slumpa seat och section
 const generateSeat = (usedSeats, quantity) => {
   const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
   const maxSeatsPerRow = 50;
@@ -16,7 +17,6 @@ const generateSeat = (usedSeats, quantity) => {
   
   for (let i = 0; i < quantity; i++) {
     let seat;
-    
     do {
   seat = `Section ${rows[currentRow]}, seat ${currentSeat}`;
   if (usedSeats.has(seat)) {
@@ -30,8 +30,6 @@ const generateSeat = (usedSeats, quantity) => {
     throw new Error("Inga lediga platser kvar.");
   }
 } while (usedSeats.has(seat));
-
-    
     usedSeats.add(seat);
     seatList.push(seat);
     

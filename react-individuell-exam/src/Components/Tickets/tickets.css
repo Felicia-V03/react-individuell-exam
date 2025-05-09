@@ -23,9 +23,16 @@
   font-family: var(--font-first-sansita);
 }
 
+.ticket-card__where{
+  font-family: var(--font-second-fira);
+  font-size: 1rem;
+  color: #181818;
+}
+
 .ticket-card__header {
   font-family: var(--font-second-fira);
   font-size: 0.7rem;
+  color: #858585;
 }
 
 .ticket-card__text {
@@ -54,6 +61,7 @@
 
 .ticket-seat {
   background-color: #dddddd;
+  color: #181818;
 }
 
 .ticket-barcode {

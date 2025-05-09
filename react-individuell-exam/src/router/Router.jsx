@@ -7,6 +7,7 @@ import OrderPage from "../Pages/OrderPage/OrderPage";
 import TicketPage from "../Pages/TicketPage/TicketPage";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
+//router for all pages
 const Router = () => {
   const router = createBrowserRouter([
     {
