@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { v4 as uuidv4 } from 'uuid';
 
 const getTickets = () => {
   const stored = localStorage.getItem("tickets");
@@ -17,15 +18,19 @@ const generateSeat = (usedSeats, quantity) => {
     let seat;
     
     do {
-      seat = `Rad ${rows[currentRow]}, Plats ${currentSeat}`;
-      
-      if (usedSeats.has(seat)) {
-        if (currentSeat > maxSeatsPerRow) {
-          currentSeat = 1;
-          currentRow += 1;
-        }
-      }
-    } while (usedSeats.has(seat) || currentSeat > maxSeatsPerRow);
+  seat = `Section ${rows[currentRow]}, seat ${currentSeat}`;
+  if (usedSeats.has(seat)) {
+    currentSeat += 1;
+    if (currentSeat > maxSeatsPerRow) {
+      currentSeat = 1;
+      currentRow += 1;
+    }
+  }
+  if (currentRow >= rows.length) {
+    throw new Error("Inga lediga platser kvar.");
+  }
+} while (usedSeats.has(seat));
+
     
     usedSeats.add(seat);
     seatList.push(seat);
@@ -44,27 +49,22 @@ const useTickets = create((set) => ({
       const newTickets = [];
       const usedSeats = new Set(state.tickets.map((t) => t.seat));
 
-      if (Array.isArray(ticket)) {
-        ticket.forEach((event) => {
-
-          const seatList = generateSeat(usedSeats, event.quantity);
-          seatList.forEach((seat, index) => {
-            newTickets.push({
-              ...event,
-              seat,
-              seatNumber: index + 1,
-            });
-          });
-        });
-      } else {
-        const seatList = generateSeat(usedSeats, ticket.quantity);
+      const addTickets = (event) => {
+        const seatList = generateSeat(usedSeats, event.quantity);
         seatList.forEach((seat, index) => {
           newTickets.push({
-            ...ticket,
+            ...event,
             seat,
             seatNumber: index + 1,
+            uuid: uuidv4().replace(/-/g, '').substring(0, 5).toUpperCase(), //Pusha in uuid till barcode
           });
         });
+      };
+
+      if (Array.isArray(ticket)) {
+        ticket.forEach(addTickets);
+      } else {
+        addTickets(ticket);
       }
 
       const updated = [...state.tickets, ...newTickets];
@@ -73,6 +73,5 @@ const useTickets = create((set) => ({
     });
   },
 }));
-
 
 export default useTickets;

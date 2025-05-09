@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 import useTickets from "../../stores/useTickets";
 import Tickets from "../Tickets/Tickets";
+import "../../index.css";
+
 
 function TicketsCarousel() {
   const { tickets } = useTickets();
@@ -16,10 +17,10 @@ function TicketsCarousel() {
   return (
     <div className="tickets-carousel">
       <Swiper
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={20}
         loop={true}
-        navigation={true}
+        navigation={false}
         modules={Navigation}
         className="tickets-list"
       >
@@ -32,7 +33,7 @@ function TicketsCarousel() {
             );}
           )
         ) : (
-          <p>Inga biljetter ännu.</p>
+          <p className="ticket-error">Inga biljetter ännu.</p>
         )}
       </Swiper>
     </div>
