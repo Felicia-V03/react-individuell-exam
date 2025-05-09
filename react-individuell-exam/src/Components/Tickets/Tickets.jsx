@@ -1,6 +1,7 @@
 import Barcode from "react-barcode";
 import "./tickets.css";
 
+//ticket card
 function Tickets({ event}) {
   return (
     <div className="ticket-card">

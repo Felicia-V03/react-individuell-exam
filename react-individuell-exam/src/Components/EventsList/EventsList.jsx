@@ -4,6 +4,7 @@ import useCounter from "../../stores/useCounter.js";
 import { Link } from "react-router-dom";
 import "./eventsList.css";
 
+// Eventlist
 function EventsList(event) {
   const { data: eventsData, isLoading, isError } = useFetch("https://santosnr6.github.io/Data/events.json");
   const events = eventsData?.events || [];
@@ -21,18 +22,13 @@ function EventsList(event) {
   if (!event) {
     return <p>Inga event tillgängliga.</p>;
   }
-
-  const savedQuantity = (() => {
-    const stored = localStorage.getItem("quantity");
-    const parsed = parseInt(stored);
-    return isNaN(parsed) ? 0 : parsed;
-  })();
   
   return (
     <ul className="events-list">
       {events.map((event) => (
         <Link to={`/event/${event.id}`} key={event.id} className="events-item">
         <p className="events-item_date"> 
+          {/* fixa så de månad blir förkortning */}
           {new Date(event.when.date).toLocaleDateString("en-GB",
             {
                 day: "2-digit",
