@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { v4 as uuidv4 } from 'uuid';
 
 const getTickets = () => {
   const stored = localStorage.getItem("tickets");
@@ -6,39 +7,39 @@ const getTickets = () => {
 };
 
 const generateSeat = (usedSeats, quantity) => {
-  const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // Möjliga sektioner/rader
+  const rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+  const maxSeatsPerRow = 50;
   let seatList = [];
-
-  // Hitta en sektion där det finns tillräckligt med lediga platser
-  for (let i = 0; i < 100; i++) {  // Maximalt 100 försök
-    const row = rows[Math.floor(Math.random() * rows.length)]; // Slumpmässig sektion
-    let availableSeats = [];
-
-    // Kolla om det finns tillräckligt med lediga platser i denna rad
-    for (let seatNumber = 1; seatNumber <= 30; seatNumber++) {
-      const seat = `Rad ${row}, plats ${seatNumber}`;
-      if (!usedSeats.has(seat)) {
-        availableSeats.push(seat);
-      }
-
-      if (availableSeats.length === quantity) {
-        break;
-      }
-    }
-
-    // Om vi har hittat tillräckligt med platser, tilldela dem
-    if (availableSeats.length === quantity) {
-      // Markera dessa platser som använda
-      availableSeats.forEach((seat) => usedSeats.add(seat));
-      seatList = availableSeats;
-      break;
+  
+  let currentRow = 0;
+  let currentSeat = 1;
+  
+  for (let i = 0; i < quantity; i++) {
+    let seat;
+    
+    do {
+  seat = `Section ${rows[currentRow]}, seat ${currentSeat}`;
+  if (usedSeats.has(seat)) {
+    currentSeat += 1;
+    if (currentSeat > maxSeatsPerRow) {
+      currentSeat = 1;
+      currentRow += 1;
     }
   }
+  if (currentRow >= rows.length) {
+    throw new Error("Inga lediga platser kvar.");
+  }
+} while (usedSeats.has(seat));
 
+    
+    usedSeats.add(seat);
+    seatList.push(seat);
+    
+    currentSeat += 1;
+  }
+  
   return seatList;
 };
-
-
 
 const useTickets = create((set) => ({
   tickets: getTickets(),
@@ -46,28 +47,24 @@ const useTickets = create((set) => ({
   saveTickets: (ticket) => {
     set((state) => {
       const newTickets = [];
-      const usedSeats = new Set(state.tickets.map((t) => t.seat)); // Redan använda platser
+      const usedSeats = new Set(state.tickets.map((t) => t.seat));
+
+      const addTickets = (event) => {
+        const seatList = generateSeat(usedSeats, event.quantity);
+        seatList.forEach((seat, index) => {
+          newTickets.push({
+            ...event,
+            seat,
+            seatNumber: index + 1,
+            uuid: uuidv4().replace(/-/g, '').substring(0, 5).toUpperCase(), //Pusha in uuid till barcode
+          });
+        });
+      };
 
       if (Array.isArray(ticket)) {
-        ticket.forEach((event) => {
-          // Slumpmässigt generera säten för varje biljett
-          const seatList = generateSeat(usedSeats, event.quantity);
-          seatList.forEach((seat) => {
-            newTickets.push({
-              ...event,
-              seat, // Tilldela sittplats
-            });
-          });
-        });
+        ticket.forEach(addTickets);
       } else {
-        // För en enskild biljett
-        const seatList = generateSeat(usedSeats, ticket.quantity);
-        seatList.forEach((seat) => {
-          newTickets.push({
-            ...ticket,
-            seat, // Tilldela sittplats
-          });
-        });
+        addTickets(ticket);
       }
 
       const updated = [...state.tickets, ...newTickets];
@@ -76,6 +73,5 @@ const useTickets = create((set) => ({
     });
   },
 }));
-
 
 export default useTickets;

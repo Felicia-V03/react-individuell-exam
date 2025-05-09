@@ -54,9 +54,14 @@
 
 .tickets-carousel {
   width: 100%;
-  padding: 1rem;
+}
+
+.ticket-error {
+  color: var(--color-white);
+  text-align: center;
+  font-family: var(--font-first-sansita);
 }
 
 .swiper {
-  height: 300px; /* eller beroende på innehållet */
+  height: auto;
 }
