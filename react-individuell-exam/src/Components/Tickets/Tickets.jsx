@@ -1,16 +1,13 @@
+import React from "react";
 
-
-function Tickets({event, seatNumber}) {
-  const seat = event.seat;
-
+function Tickets({ event,  }) {
   return (
-    <p>
-      ID: {event.id}
-      section: {seat}
-      seatNumber: {seatNumber}
-
-    </p>
-  )
+    <div className="ticket-card">
+      <h3>{event.name}</h3>
+      <p>{event.date}</p>
+      <p>Platsnummer: {event.seat}</p>
+    </div>
+  );
 }
 
 export default Tickets;

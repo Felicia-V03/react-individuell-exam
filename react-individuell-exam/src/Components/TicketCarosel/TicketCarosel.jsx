@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
-import React from "react";
-import { Swiper, SwiperSlide} from "swiper/react";
+import { useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "../../index.css";
-import { Pagination, Navigation } from "swiper/modules";
 import useTickets from "../../stores/useTickets";
 import Tickets from "../Tickets/Tickets";
 
 function TicketsCarousel() {
   const { tickets } = useTickets();
+
+  useEffect(() => {
+    console.log(tickets);
+  }, [tickets]);
 
   return (
     <div className="tickets-carousel">
@@ -19,16 +20,16 @@ function TicketsCarousel() {
         spaceBetween={20}
         loop={true}
         navigation={true}
-        modules={[Navigation, Pagination]}
+        modules={Navigation}
         className="tickets-list"
       >
         {Array.isArray(tickets) && tickets.length > 0 ? (
-          tickets.map((event) =>
-            Array.from({ length: event.quantity }, (_, i) => (
-              <SwiperSlide key={`${event.id}-${i}`}>
-                <Tickets event={event} seatNumber={i + 1} />
+          tickets.map((event, index) => {
+            return (
+              <SwiperSlide key={`${event.id}-${index}`}>
+                <Tickets event={event} seat={event.seat} />
               </SwiperSlide>
-            ))
+            );}
           )
         ) : (
           <p>Inga biljetter ännu.</p>
@@ -37,6 +38,5 @@ function TicketsCarousel() {
     </div>
   );
 }
-
 
 export default TicketsCarousel;
