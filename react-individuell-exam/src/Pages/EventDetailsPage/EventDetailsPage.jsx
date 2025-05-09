@@ -11,14 +11,11 @@ function EventDetailsPage() {
   const { data: eventsData, isLoading, isError } = useFetch("https://santosnr6.github.io/Data/events.json");
   const { id } = useParams();
   const { quantity } = useCounter();
-  const { cart } = useCart();
 
   const events = eventsData?.events || [];
   const event = events.find(event => String(event.id) === id);
-  console.log("Fetched event data:", event);
+  const count = quantity[event?.id] || 0;
 
-  const existingEventInCart = cart.find(item => item.id === event?.id);
-  const totalQuantity = quantity + (existingEventInCart ? existingEventInCart.quantity : 0);
 
   if (!event) return null;
   if (isLoading) return <p>Laddar event...</p>;
@@ -32,7 +29,7 @@ function EventDetailsPage() {
       <section className="order-counter">
         <section className="order-counter_container">
           <section className="order-counter_header">
-            <h2 className="order-counter_total">{event.price * totalQuantity} sek</h2>
+            <h2 className="order-counter_total">{event.price * count} sek</h2>
           </section>
           <OrderCounter event={event}/>
         </section>

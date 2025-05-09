@@ -1,94 +1,72 @@
 import { create } from "zustand";
 
-const getCartFromLocalStorage = () => {
-  const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : [];
+const getInitialCart = () => {
+  try {
+    const stored = localStorage.getItem("cart");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
+const getQuantityFromStorage = (id) => {
+  try {
+    const storedQuantities = localStorage.getItem("quantity");
+    const parsed = storedQuantities ? JSON.parse(storedQuantities) : {};
+    return parsed[id] || 1;  // default = 1 om inget finns
+  } catch {
+    return 1;
+  }
 };
 
 const useCart = create((set, get) => ({
-  cart: getCartFromLocalStorage(),
+  cart: getInitialCart(),
 
-  addToCart: (event) => {
+  addToCart: (item) => {
     const cart = get().cart;
-    const existing = cart.find((e) => e.id === event.id);
+    const quantityFromStorage = getQuantityFromStorage(item.id);
 
-    const updatedCart = existing
-      ? cart.map((e) =>
-          e.id === event.id ? { ...e, quantity: e.quantity + event.quantity } : e
+    const existingItem = cart.find((i) => i.id === item.id);
+
+    const updatedCart = existingItem
+      ? cart.map((i) =>
+          i.id === item.id
+            ? { ...i, quantity: quantityFromStorage }  // ersätt med kvantitet från storage
+            : i
         )
-      : [...cart, { ...event, quantity: event.quantity }];
+      : [...cart, { ...item, quantity: quantityFromStorage }];
 
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
     set({ cart: updatedCart });
+    get().saveToLocalStorage(updatedCart);
   },
 
-  increaseQuantity: (id) => {
-    const cart = get().cart;
-    const updatedCart = cart.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    set({ cart: updatedCart });
+  saveToLocalStorage: (cart) => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch (error) {
+      console.error("Error saving to localStorage", error);
+    }
   },
 
-  decreaseQuantity: (id) => {
-    const cart = get().cart;
-    const updatedCart = cart.map(item =>
-      item.id === id
-        ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
-        : item
-    );
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    set({ cart: updatedCart });
+  updateItemQuantity: (id, quantity) => {
+  const cart = get().cart;
+  const updatedCart = cart.map((item) =>
+    item.id === id ? { ...item, quantity } : item
+  );
+  set({ cart: updatedCart });
+  get().saveToLocalStorage(updatedCart);
   },
 
-  setCart: (newCart) => {
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    set({ cart: newCart });
+  removeFromCart: (id) => {
+    const updatedCart = get().cart.filter((item) => item.id !== id);
+    set({ cart: updatedCart });
+    get().saveToLocalStorage(updatedCart);
   },
 
   clearCart: () => {
-    localStorage.setItem("cart", JSON.stringify([]));
     set({ cart: [] });
+    get().saveToLocalStorage([]);
   },
 }));
 
 export default useCart;
-
-// import { create } from "zustand";
-
-// const getCartFromLocalStorage = () => {
-//   const storedCart = localStorage.getItem("cart");
-//   return storedCart ? JSON.parse(storedCart) : [];
-// };
-
-// const useCart = create((set, get) => ({
-//   cart: getCartFromLocalStorage(),
-
-//   increaseQuantity: (id) => {
-//     const cart = get().cart;
-//     const updatedCart = cart.map(item =>
-//       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-//     );
-//     localStorage.setItem("cart", JSON.stringify(updatedCart));
-//     set({ cart: updatedCart });
-//   },
-
-//   decreaseQuantity: (id) => {
-//     const cart = get().cart;
-//     const updatedCart = cart.map(item =>
-//       item.id === id
-//         ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
-//         : item
-//     );
-//     localStorage.setItem("cart", JSON.stringify(updatedCart));
-//     set({ cart: updatedCart });
-//   },
-
-//   setCart: (newCart) => {
-//     localStorage.setItem("cart", JSON.stringify(newCart));
-//     set({ cart: newCart });
-//   }
-// }));
-
-// export default useCart;

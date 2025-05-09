@@ -15,7 +15,8 @@ function OrderPage() {
     <div className="order-page page-container">
       <h1 className="page_title">Order</h1>
       <EventsOrder />
-      <h2 className="order-listtotal">Totalt: {totalPrice} sek</h2>
+      <p className="page_sub">Totalt värde på order</p>
+      <h2 className="order-total">{totalPrice} sek</h2>
       <CartButton>Skicka order</CartButton>
     </div>
   );

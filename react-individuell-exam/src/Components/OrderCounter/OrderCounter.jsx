@@ -1,25 +1,24 @@
-import useCart from "../../stores/useCartStore";
+import useCounter from "../../stores/useCounter";
 import "./orderCounter.css";
 import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
 
 function OrderCounter({ event }) {
-  const { cart, increaseQuantity, decreaseQuantity } = useCart();
+  const { quantity, increase, decrease } = useCounter();
 
-  const existingItem = cart.find(item => item.id === event.id);
-  const quantity = existingItem ? existingItem.quantity : 0;
+  const count = quantity[event.id] || 0;
 
   return (
     <section className="order-counter_buttons">
       <button
-        onClick={() => decreaseQuantity(event.id)}
+        onClick={() => decrease(event.id)}
         className={`order-decrease_button id-${event.id}`}
-        disabled={quantity <= 1}
+        disabled={count <= 0}
       >
         <i className="las la-minus"></i>
       </button>
-      <span>{quantity}</span>
+      <span className="order-counter_total">{count}</span>
       <button
-        onClick={() => increaseQuantity(event.id)}
+        onClick={() => increase(event.id)}
         className={`order-increase_button id-${event.id}`}
       >
         <i className="las la-plus"></i>
@@ -27,5 +26,6 @@ function OrderCounter({ event }) {
     </section>
   );
 }
+
 
 export default OrderCounter;
