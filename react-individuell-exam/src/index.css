@@ -32,7 +32,6 @@
   background-color: var(--color-purple);
   padding: 2rem;
   gap: 1rem;
-
 }
 
 .page_title {
@@ -47,7 +46,17 @@
 .page_sub {
   font-family: var(--font-second-fira);
   font-size: 1.2rem;
+  font-style: italic;
   color: var(--color-white-80);
   padding: 0 3rem;
   text-align: center;
+}
+
+.tickets-carousel {
+  width: 100%;
+  padding: 1rem;
+}
+
+.swiper {
+  height: 300px; /* eller beroende på innehållet */
 }

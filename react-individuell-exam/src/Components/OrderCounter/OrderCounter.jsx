@@ -1,35 +1,31 @@
-import useCounter from "../../stores/useCounter.js";
-import useCart from "../../stores/useCartStore";
+import useCounter from "../../stores/useCounter";
 import "./orderCounter.css";
 import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
 
 function OrderCounter({ event }) {
   const { quantity, increase, decrease } = useCounter();
-  const { cart } = useCart();
 
-  const existingEventInCart = cart.find(item => item.id === event?.id);
-  const totalQuantity = quantity + (existingEventInCart ? existingEventInCart.quantity : 0);
-
-  if (!event) return null;
+  const count = quantity[event.id] || 0;
 
   return (
-    <section className="order-counter">
-      <section className="order-counter_container">
-        <section className="order-counter_header">
-          <h2 className="order-counter_total">{event.price * totalQuantity} sek</h2>
-        </section>
-        <section className="order-counter_buttons">
-          <button onClick={decrease} className="order-decrease_button">
-            <i className="las la-minus"></i>  
-          </button>        
-          <p>{totalQuantity}</p>
-          <button onClick={increase} className="order-increase_button">
-            <i className="las la-plus"></i>
-          </button>
-        </section>
-      </section>
+    <section className="order-counter_buttons">
+      <button
+        onClick={() => decrease(event.id)}
+        className={`order-decrease_button id-${event.id}`}
+        disabled={count <= 0}
+      >
+        <i className="las la-minus"></i>
+      </button>
+      <span className="order-counter_total">{count}</span>
+      <button
+        onClick={() => increase(event.id)}
+        className={`order-increase_button id-${event.id}`}
+      >
+        <i className="las la-plus"></i>
+      </button>
     </section>
   );
 }
+
 
 export default OrderCounter;
